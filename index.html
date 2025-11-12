@@ -20,10 +20,13 @@
   <style>
     html, body {
       overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: hidden;
       width: 100%;
       height: 100%;
       margin: 0;
       padding: 0;
+      position: fixed;
     }
 
     .container {
@@ -569,7 +572,7 @@
       text-align: center;
       padding: 0px 30px;
       margin-top: 10px;
-      margin-bottom: 60px;
+      margin-bottom: 10px;
       font-family: 'Dancing Script', cursive;
       /* Giữ nguyên như ban đầu */
       position: initial;
@@ -577,7 +580,6 @@
       word-break: break-word;
       overflow-wrap: anywhere;
       white-space: pre-wrap;
-      max-height: 55vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -643,9 +645,9 @@
     @media (max-width: 480px) {
       .boxLetter .formLetter {
         width: 92vw;
-        height: auto;
-        max-height: 80vh;
-        /* Không vượt quá chiều cao màn hình */
+        height: 30vh;
+        max-height: 30vh;
+        /* Height cố định khoảng 30% màn hình, nằm giữa */
       }
 
       .formLetter .wrapperLetter {
@@ -660,26 +662,38 @@
       /* Ẩn ảnh hộp quà trong modal để dành chỗ cho chữ */
       .textLetter {
         padding: 6px 4px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
       }
 
       .textLetter h2 {
         font-size: 24px;
+        flex-shrink: 0;
+        margin-bottom: 5px;
       }
 
       .textLetter .contentLetter {
         font-size: 16px;
-        max-height: 58vh;
-        /* Vùng cuộn nội dung */
+        flex: 1 1 auto;
+        width: 100%;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         padding: 0 12px;
-        margin-bottom: 50px;
+        margin-bottom: 40px;
+        min-height: 0;
       }
 
       .heartAnimation {
-        position: static;
+        position: absolute;
         width: 120px;
-        margin: 8px auto 0;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
       }
 
       .signature {
@@ -969,9 +983,13 @@ Cảm ơn anh vì tất cả ❤️❤️❤️ `;
       if (indexTextContent < textLetterP.length) {
         textLetterContent.textContent += textLetterP[indexTextContent];
         indexTextContent++;
+        // Tự động scroll đến phần đang được gõ
+        textLetterContent.scrollTop = textLetterContent.scrollHeight;
         setTimeout(textCharLetterContent, 2500);
       } else {
         clearInterval(timoutTextLetterContent);
+        // Scroll đến cuối cùng khi hết thư
+        textLetterContent.scrollTop = textLetterContent.scrollHeight;
       }
     }
 
