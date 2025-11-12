@@ -1020,9 +1020,10 @@ Cảm ơn anh vì tất cả ❤️❤️❤️ `;
         indexTextContent++;
         // Tự động scroll đến phần đang được gõ
         textLetterContent.scrollTop = textLetterContent.scrollHeight;
-        setTimeout(textCharLetterContent, 2500);
+        // Delay cố định 50ms cho mỗi ký tự để tốc độ đồng đều
+        timoutTextLetterContent = setTimeout(textCharLetterContent, 50);
       } else {
-        clearInterval(timoutTextLetterContent);
+        clearTimeout(timoutTextLetterContent);
         // Scroll đến cuối cùng khi hết thư
         textLetterContent.scrollTop = textLetterContent.scrollHeight;
       }
@@ -1031,10 +1032,8 @@ Cảm ơn anh vì tất cả ❤️❤️❤️ `;
     function funcTimeoutLetterContent() {
       indexTextContent = 0;
       textLetterContent.textContent = '';
-      clearInterval(timoutTextLetterContent);
-      timoutTextLetterContent = setInterval(() => {
-        textCharLetterContent();
-      }, 100);
+      clearTimeout(timoutTextLetterContent);
+      textCharLetterContent();
     }
 
     $(document).ready(function () {
