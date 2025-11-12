@@ -572,7 +572,7 @@
       text-align: center;
       padding: 0px 30px;
       margin-top: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       font-family: 'Dancing Script', cursive;
       /* Giữ nguyên như ban đầu */
       position: initial;
@@ -591,6 +591,38 @@
       color: #fff;
       cursor: pointer;
       font-size: 25px;
+    }
+
+    .close-arrow-btn {
+      position: absolute;
+      right: 8px;
+      bottom: 2px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #FF6666;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 2px 8px rgba(255, 102, 102, 0.3);
+    }
+
+    .close-arrow-btn i {
+      font-size: 18px;
+    }
+
+    .close-arrow-btn:hover {
+      transform: scale(1.1);
+      background-color: #ff4444;
+    }
+
+    .close-arrow-btn:active {
+      transform: scale(0.95);
     }
 
     .show {
@@ -697,7 +729,7 @@
       }
 
       .signature {
-        right: 12px;
+        right: 70px;
         bottom: 8px;
         font-size: 16px;
       }
@@ -786,6 +818,9 @@
           <!-- Thêm chữ ký ở đây -->
           <div class="signature"><br>Cheng</div>
         </div>
+        <button class="close-arrow-btn">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
       </div>
       <div class="before"></div>
     </div>
@@ -1024,6 +1059,14 @@ Cảm ơn anh vì tất cả ❤️❤️❤️ `;
       });
 
       $('.fa-xmark').click(function () {
+        $('.wrapperLetterForm').css('display', 'none');
+        if (bgm) {
+          bgm.pause();
+          bgm.currentTime = 0;
+        }
+      });
+
+      $('.close-arrow-btn').click(function () {
         $('.wrapperLetterForm').css('display', 'none');
         if (bgm) {
           bgm.pause();
